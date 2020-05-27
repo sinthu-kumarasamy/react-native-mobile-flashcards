@@ -1,4 +1,4 @@
-import {getDeck} from '../utils/api'
+import {getDeck, saveDeckTitle} from '../utils/api'
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 
@@ -22,4 +22,12 @@ export function handleInitialData(){
            dispatch(receiveDecks(decks))
        }) 
     }
+}
+
+export function addNewDeck(title){
+  return (dispatch)=>{
+    return saveDeckTitle(title).then((deck)=>{
+      dispatch(addDeck(deck))
+    })
+  }
 }

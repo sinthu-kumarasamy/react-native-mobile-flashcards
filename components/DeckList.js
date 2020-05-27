@@ -12,6 +12,7 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props;
+    console.log(decks)
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text style={styles.title}>Mobile Flashcards</Text>
@@ -23,7 +24,7 @@ class DeckList extends Component {
               </View>
               <View>
                 <Text style={styles.cardText}>
-                  {deck.questions.length} cards
+                  {deck.questions === 'undefined' ? 0 :deck.questions.length} cards
                 </Text>
               </View>
             </View>
