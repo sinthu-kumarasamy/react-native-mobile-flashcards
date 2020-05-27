@@ -5,12 +5,10 @@ export const DECK_STORAGE_KEY = 'Flashcards:decks'
 
 
 export function getDeck () {
-    const deck_data = AsyncStorage.getItem(DECK_STORAGE_KEY)
-    if (deck_data === null) {
-        AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
-      }
-  
-    return deck_data === null ? decks : JSON.parse(deck_data);
+    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
+        const data = JSON.parse(results);
+        return data === null ? decks : data;
+    });
 }
 
 // export function getDeck(id) {
