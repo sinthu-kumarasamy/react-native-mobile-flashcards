@@ -11,7 +11,9 @@ import middleware from './middleware'
 import  DeckView from './components/DeckView'
 import  TakeQuiz from './components/TakeQuiz'
 import  AddQuiz from './components/AddQuiz'
-import { StyleSheet } from 'react-native';
+import { setLocalNotification } from './utils/helper'
+import { Notifications } from 'expo';
+
 
 
 export const store = createStore(
@@ -46,6 +48,10 @@ function MyStack() {
 
 
 export default class App extends React.Component {
+   componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={store}>

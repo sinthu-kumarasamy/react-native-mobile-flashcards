@@ -5,6 +5,7 @@ import { handleInitialData } from "../actions/index";
 import { gray, purple,white,lightPurp } from "../utils/color";
 import { TouchableOpacity,ScrollView } from "react-native-gesture-handler";
 
+
 class DeckList extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -14,7 +15,7 @@ class DeckList extends Component {
     const { decks } = this.props;
     return (
       <ScrollView style={styles.scrollView}>
-        <ImageBackground source={require('../assets/quiz.png')} style={styles.image}>
+        <ImageBackground source={require('../assets/home.jpg')} style={styles.image}>
         <Text style={styles.title}>Mobile Flashcards</Text>
         {Object.values(decks).map((deck) => {
           return (

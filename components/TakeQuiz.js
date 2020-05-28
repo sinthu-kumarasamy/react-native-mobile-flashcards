@@ -3,6 +3,7 @@ import { View, Text, StyleSheet,Button,ImageBackground } from 'react-native';
 import { red, purple,white,lightPurp } from "../utils/color";
 import ViewPager from '@react-native-community/viewpager';
 import { connect } from 'react-redux';
+import { setLocalNotification, clearLocalNotification } from '../utils/helper';
 
 
 
@@ -15,6 +16,11 @@ import { connect } from 'react-redux';
     questionCount: this.props.deck.questions.length,
     answered: []
   };
+
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification);
+  }
+  
   handlePageChange = evt => {
     this.setState({
       show: 'question'
