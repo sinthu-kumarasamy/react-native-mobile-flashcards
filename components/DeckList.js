@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/index";
 import { gray, purple,white,lightPurp } from "../utils/color";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity,ScrollView } from "react-native-gesture-handler";
 
 class DeckList extends Component {
   componentDidMount() {
@@ -14,12 +14,12 @@ class DeckList extends Component {
     const { decks } = this.props;
     console.log(decks)
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ScrollView>
         <Text style={styles.title}>Mobile Flashcards</Text>
         {Object.values(decks).map((deck) => {
           return (
-            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Deck',{title :deck.title })} >
-            <View key={deck.title} style={styles.deckContainer}>
+            <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate('Deck',{title :deck.title })} >
+            <View  style={styles.deckContainer}>
               <View>
                 <Text style={styles.deckText}>{deck.title}</Text>
               </View>
@@ -32,7 +32,7 @@ class DeckList extends Component {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </ScrollView>
     );
   }
 }

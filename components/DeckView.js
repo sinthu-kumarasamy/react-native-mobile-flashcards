@@ -21,6 +21,7 @@ class DeckView extends Component {
           title="Start Quiz"
           onPress={() => this.props.navigation.navigate('Quiz', {title: deck.title})}
         />
+        <Text>{`\n`}</Text>
       <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddQuestion', {title: deck.title})}/>
      </View>
     )

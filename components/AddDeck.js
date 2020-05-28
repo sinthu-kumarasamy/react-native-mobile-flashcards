@@ -33,11 +33,11 @@ class AddDeck extends Component{
               />
             </View>
             <Button
-          title="Press me"
+          title="Create Deck"
           onPress={this.handleSubmit}
           disabled = {this.state.deck_title===''}
         >
-              Create Deck
+              
             </Button>
           </View>
         )
