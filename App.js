@@ -11,6 +11,7 @@ import middleware from './middleware'
 import  DeckView from './components/DeckView'
 import  TakeQuiz from './components/TakeQuiz'
 import  AddQuiz from './components/AddQuiz'
+import { StyleSheet } from 'react-native';
 
 
 export const store = createStore(
@@ -24,8 +25,8 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Decks" component={DeckList} />
-      <Tab.Screen name="Add" component={AddDeck} />
+      <Tab.Screen name="Decks"  component={DeckList} />
+      <Tab.Screen name="Add"  component={AddDeck} />
     </Tab.Navigator>
   );
 }
@@ -55,3 +56,4 @@ export default class App extends React.Component {
     )
   }
 }
+

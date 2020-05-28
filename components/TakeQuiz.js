@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, StyleSheet,Button } from 'react-native';
-import { gray, purple,white,lightPurp } from "../utils/color";
+import { View, Text, StyleSheet,Button,ImageBackground } from 'react-native';
+import { red, purple,white,lightPurp } from "../utils/color";
 import ViewPager from '@react-native-community/viewpager';
 import { connect } from 'react-redux';
 
@@ -14,7 +13,7 @@ import { connect } from 'react-redux';
     correct: 0,
     incorrect: 0,
     questionCount: this.props.deck.questions.length,
-    answered: Array(this.props.deck.questions.length).fill(0)
+    answered: []
   };
   handlePageChange = evt => {
     this.setState({
@@ -38,20 +37,20 @@ import { connect } from 'react-redux';
           this.setState({ show: 'result' });
         } else {
           this.viewPager.setPage(page + 1);
-          this.setState(prevState => ({
+          this.setState({
             show: 'question'
-          }));
+          });
         }
       }
     );
   };
   handleReset = () => {
-    this.setState(prevState => ({
+    this.setState( {
       show: 'question',
       correct: 0,
       incorrect: 0,
-      answered: Array(prevState.questionCount).fill(0)
-    }));
+      answered: []
+    });
   };
   render() {
     const { questions } = this.props.deck;
@@ -76,7 +75,7 @@ import { connect } from 'react-redux';
       const { correct, questionCount } = this.state;
       const percent = ((correct / questionCount) * 100).toFixed(0);
       const resultStyle =
-        percent >= 70 ? styles.resultTextGood : styles.resultTextBad;
+        percent >= 70 ? styles.goodResult : styles.avgResult;
 
       return (
         <View style={styles.pageStyle}>
@@ -126,12 +125,14 @@ import { connect } from 'react-redux';
       >
         {questions.map((question, index) => (
           <View style={styles.pageStyle} key={index}>
+              
             <View style={styles.block}>
               <Text style={styles.count}>
                 {index + 1} / {questions.length}
               </Text>
             </View>
             <View style={[styles.block, styles.questionContainer]}>
+            <ImageBackground source={require('../assets/question.jpg')} style={styles.image}>
               <Text style={styles.questionText}>
                 {show === 'question' ? 'Question' : 'Answer'}
               </Text>
@@ -142,6 +143,7 @@ import { connect } from 'react-redux';
                     : question.answer}
                 </Text>
               </View>
+              </ImageBackground>
             </View>
             {show === 'question' ? (
               <Button
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    backgroundColor: gray,
+    backgroundColor: lightPurp,
     justifyContent: 'space-around'
   },
   block: {
@@ -213,6 +215,11 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     flexGrow: 1
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    resizeMode:'contain'
+  },
   questionWrapper: {
     flex: 1,
     justifyContent: 'center'
@@ -222,13 +229,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20
   },
-  resultTextGood: {
-    color: lightPurp,
+  goodResult: {
+    color: white,
     fontSize: 46,
     textAlign: 'center'
   },
-  resultTextBad: {
-    color: purple,
+  avgResult: {
+    color: red,
     fontSize: 46,
     textAlign: 'center'
   }

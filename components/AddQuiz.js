@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet,Button,TextInput } from "react-native";
+import { View, Text, StyleSheet,Button,TextInput,ImageBackground } from "react-native";
 import { connect } from 'react-redux'
 import { gray, purple,white,lightPurp } from "../utils/color";
 import { addQuestionToDeck } from '../actions';
@@ -32,6 +32,7 @@ class AddQuiz extends Component{
     render() {
         return (
             <View style={styles.container}>
+              <ImageBackground source={require('../assets/question.png')} style={styles.image}>
         <View>
           <View style={styles.block}>
             <Text style={styles.title}>Add a question</Text>
@@ -56,6 +57,7 @@ class AddQuiz extends Component{
         />
         </View>
         <View style={{ height: '30%' }} />
+        </ImageBackground>
       </View>
         )
     }
@@ -74,9 +76,15 @@ const styles = StyleSheet.create({
     block: {
       marginBottom: 20
     },
+    image: {
+      flex: 1,
+      justifyContent: "center",
+      resizeMode:'contain'
+    },
     title: {
       textAlign: 'center',
-      fontSize: 32
+      fontSize: 32,
+      color:white
     },
     input: {
       borderWidth: 1,

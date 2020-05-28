@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet ,ImageBackground} from "react-native";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/index";
 import { gray, purple,white,lightPurp } from "../utils/color";
@@ -12,9 +12,9 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props;
-    console.log(decks)
     return (
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
+        <ImageBackground source={require('../assets/quiz.png')} style={styles.image}>
         <Text style={styles.title}>Mobile Flashcards</Text>
         {Object.values(decks).map((deck) => {
           return (
@@ -32,6 +32,7 @@ class DeckList extends Component {
             </TouchableOpacity>
           );
         })}
+        </ImageBackground>
       </ScrollView>
     );
   }
@@ -45,16 +46,27 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     color: purple,
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    resizeMode:'contain'
+  },
+
+  scrollView:{
+    backgroundColor : 'pink'
+  },
   deckContainer: {
     alignItems: "center",
     justifyContent: "center",
     flexBasis: 120,
     minHeight: 120,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: "black",
     backgroundColor: white,
-    borderRadius: 5,
-    width:400,
+    elevation : 20,
+    borderRadius: 10,
+    marginLeft:30,
+    width:300,
     marginBottom: 10,
   },
   deckText: {

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet,Button } from "react-native";
+import { View, Text, StyleSheet,Button,ImageBackground } from "react-native";
 import {connect} from "react-redux"
 import { gray, purple,white,lightPurp } from "../utils/color";
+const image = { uri: "./assets/quiz.jpg" };
 class DeckView extends Component {
   render() {
       const {deck} =  this.props
      return (
-     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+     <View style={{ flex: 1, justifyContent: "center", alignItems: "center"}}>
+         <ImageBackground source={require('../assets/quiz.jpg')} style={styles.image}>
      <View key={deck.title} style={styles.deckContainer}>
+   
        <View>
          <Text style={styles.deckText}>{deck.title}</Text>
        </View>
@@ -17,12 +20,14 @@ class DeckView extends Component {
          </Text>
        </View>
      </View>
+     <Text>{`\n`}</Text>
      <Button
           title="Start Quiz"
           onPress={() => this.props.navigation.navigate('Quiz', {title: deck.title})}
         />
         <Text>{`\n`}</Text>
       <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddQuestion', {title: deck.title})}/>
+      </ImageBackground>
      </View>
     )
   }
@@ -36,17 +41,23 @@ const styles = StyleSheet.create({
       marginBottom: 16,
       color: purple,
     },
-    deckContainer: {
-      alignItems: "center",
+    image: {
+      flex: 1,
       justifyContent: "center",
-      flexBasis: 120,
-      minHeight: 120,
-      borderWidth: 1,
-      borderColor: "#aaa",
-      backgroundColor: white,
-      borderRadius: 5,
-      width:400,
-      marginBottom: 10,
+      resizeMode:'contain'
+    },
+    deckContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexBasis: 120,
+    minHeight: 120,
+    borderWidth: 1,
+    borderColor: "black",
+    backgroundColor: white,
+    elevation : 20,
+    borderRadius: 10,
+    width:300,
+    marginBottom: 10,
     },
     deckText: {
       fontSize: 28,

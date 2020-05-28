@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,StyleSheet,TextInput,Button} from 'react-native'
+import {View,Text,StyleSheet,TextInput,Button,ImageBackground} from 'react-native'
 import { gray, purple,white,lightPurp } from "../utils/color";
 import { addNewDeck } from '../actions';
 import {connect} from 'react-redux'
@@ -21,6 +21,7 @@ class AddDeck extends Component{
     render(){
         return(
             <View style={styles.container}>
+               <ImageBackground source={require('../assets/quiz.png')} style={styles.image}>
             <View style={{ height: 60 }} />
             <View style={styles.block}>
               <Text style={styles.title}>What is the title of your new deck?</Text>
@@ -39,10 +40,12 @@ class AddDeck extends Component{
         >
               
             </Button>
+            </ImageBackground>
           </View>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -51,14 +54,18 @@ const styles = StyleSheet.create({
       paddingLeft: 16,
       paddingRight: 16,
       paddingBottom: 16,
-      backgroundColor: gray
+    },
+    image: {
+      flex: 1,
+      justifyContent: "center",
+      resizeMode:'contain'
     },
     block: {
       marginBottom: 20
     },
     title: {
       textAlign: 'center',
-      fontSize: 32
+      fontSize: 32,
     },
     input: {
       borderWidth: 1,
