@@ -1,7 +1,7 @@
-import {getDeck, saveDeckTitle} from '../utils/api'
+import {getDeck, saveDeckTitle,addCardToDeckAS} from '../utils/api'
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
-
+export const ADD_CARD = 'ADD_CARD'
 export function receiveDecks (decks) {
   return {
     type: RECEIVE_DECKS,
@@ -9,11 +9,19 @@ export function receiveDecks (decks) {
   }
 }
 
-export function addDeck (deck) {
+export function addDeck (title) {
   return {
     type: ADD_DECK,
-    deck,
+    title,
   }
+}
+
+export function addCardToDeck(deckId, card) {
+  return {
+    type: ADD_CARD,
+    deckId,
+    card
+  };
 }
 
 export function handleInitialData(){
@@ -26,8 +34,13 @@ export function handleInitialData(){
 
 export function addNewDeck(title){
   return (dispatch)=>{
-    return saveDeckTitle(title).then((deck)=>{
-      dispatch(addDeck(deck))
-    })
+    return saveDeckTitle(title).then(()=>dispatch(addDeck(title))
+    )
+  }
+}
+
+export function  addQuestionToDeck(deckId, card){
+  return (dispatch)=>{
+    return addCardToDeckAS(deckId, card).then(() => dispatch(addCardToDeck(deckId, card)))
   }
 }

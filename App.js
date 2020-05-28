@@ -1,37 +1,23 @@
 import React from 'react'
-import { View, Platform, StatusBar,Text } from 'react-native'
-import { createStore,applyMiddleware } from 'redux'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers/index'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { purple, white } from './utils/color'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { createStackNavigator } from '@react-navigation/stack';
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import middleware from './middleware'
+import  DeckView from './components/DeckView'
+import  TakeQuiz from './components/TakeQuiz'
+import  AddQuiz from './components/AddQuiz'
 
-const store = createStore(
+
+export const store = createStore(
   reducers,
-  middleware 
+  middleware
 )
 
-
-// function HomeScreen() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Home!</Text>
-//     </View>
-//   );
-// }
-
-//   return (
-// function SettingsScreen() {
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Settings!</Text>
-//     </View>
-//   );
-// }
 
 const Tab = createBottomTabNavigator();
 
@@ -44,14 +30,27 @@ function MyTabs() {
   );
 }
 
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={MyTabs} />
+      <Stack.Screen name="Deck" component={DeckView} />
+      <Stack.Screen name="Quiz" component={TakeQuiz} />
+      <Stack.Screen name="AddQuestion" component={AddQuiz} />
+    </Stack.Navigator>
+  );
+}
+
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-      <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+        <NavigationContainer>
+          <MyStack />
+        </NavigationContainer>
       </Provider>
     )
   }

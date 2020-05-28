@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { getDeck } from "../utils/api";
 import { handleInitialData } from "../actions/index";
 import { gray, purple,white,lightPurp } from "../utils/color";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class DeckList extends Component {
   componentDidMount() {
@@ -18,6 +18,7 @@ class DeckList extends Component {
         <Text style={styles.title}>Mobile Flashcards</Text>
         {Object.values(decks).map((deck) => {
           return (
+            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Deck',{title :deck.title })} >
             <View key={deck.title} style={styles.deckContainer}>
               <View>
                 <Text style={styles.deckText}>{deck.title}</Text>
@@ -28,6 +29,7 @@ class DeckList extends Component {
                 </Text>
               </View>
             </View>
+            </TouchableOpacity>
           );
         })}
       </View>
